@@ -51,8 +51,7 @@ public class Main {
             JTextField postY = new JTextField();
             postY.setBounds(leftX + 90, 120, 40, 25);
 
-            JComboBox<String> colorBox =
-                    new JComboBox<>(new String[]{"red", "white", "green", "yellow"});
+            JComboBox<String> colorBox = new JComboBox<>(new String[]{"red", "white", "green", "yellow"});
             colorBox.setBounds(leftX + 140, 120, 120, 25);
 
             JTextArea msgArea = new JTextArea();
@@ -70,8 +69,7 @@ public class Main {
             JCheckBox colorCheck = new JCheckBox("color");
             colorCheck.setBounds(leftX, 290, 70, 25);
 
-            JComboBox<String> getColorBox =
-                    new JComboBox<>(new String[]{"red", "white", "green", "yellow"});
+            JComboBox<String> getColorBox = new JComboBox<>(new String[]{"red", "white", "green", "yellow"});
             getColorBox.setBounds(leftX + 80, 290, 120, 25);
 
             JCheckBox containsCheck = new JCheckBox("contains");
@@ -141,6 +139,7 @@ public class Main {
 
             /* Enable and disable helpers */
             Runnable enableCommands = () -> {
+                
                 connectBtn.setEnabled(false);
                 disconnectBtn.setEnabled(true);
                 postBtn.setEnabled(true);
@@ -152,6 +151,7 @@ public class Main {
             };
 
             Runnable disableCommands = () -> {
+
                 connectBtn.setEnabled(true);
                 disconnectBtn.setEnabled(false);
                 postBtn.setEnabled(false);
@@ -163,37 +163,35 @@ public class Main {
             };
 
             /* Button actions */
-            connectBtn.addActionListener(e -> {
-                output.append("CONNECT " + ipField.getText() + ":" + portField.getText() + "\n\n");
+            connectBtn.addActionListener(e -> {output.append("CONNECT " + ipField.getText() + ":" + portField.getText() + "\n\n");
                 enableCommands.run();
             });
 
-            disconnectBtn.addActionListener(e -> {
-                output.append("DISCONNECT\n\n");
+            disconnectBtn.addActionListener(e -> {output.append("DISCONNECT\n\n");
                 disableCommands.run();
             });
 
-            postBtn.addActionListener(e ->
-                    output.append("POST " + postX.getText() + " " + postY.getText() + " "
-                            + colorBox.getSelectedItem() + " " + msgArea.getText() + "\n\n"));
+            postBtn.addActionListener(e -> output.append("POST " + postX.getText() + " " + postY.getText() + " " + colorBox.getSelectedItem() + " " + msgArea.getText() + "\n\n"));
 
-            getBtn.addActionListener(e -> {
-                String cmd = "GET";
+            getBtn.addActionListener(e -> { String cmd = "GET";
+
                 if (colorCheck.isSelected()) cmd += " color " + getColorBox.getSelectedItem();
+
                 if (containsCheck.isSelected())
                     cmd += " contains " + containsX.getText() + " " + containsY.getText();
+
                 if (refersCheck.isSelected())
                     cmd += " refersTo " + refersField.getText();
+
                 output.append(cmd + "\n\n");
             });
 
-            pinBtn.addActionListener(e ->
-                    output.append("PIN " + pinX.getText() + " " + pinY.getText() + "\n\n"));
+            pinBtn.addActionListener(e -> output.append("PIN " + pinX.getText() + " " + pinY.getText() + "\n\n"));
 
-            unpinBtn.addActionListener(e ->
-                    output.append("UNPIN " + pinX.getText() + " " + pinY.getText() + "\n\n"));
+            unpinBtn.addActionListener(e -> output.append("UNPIN " + pinX.getText() + " " + pinY.getText() + "\n\n"));
 
             clearBtn.addActionListener(e -> output.append("CLEAR\n\n"));
+
             shakeBtn.addActionListener(e -> output.append("SHAKE\n\n"));
 
             /* Add components */
